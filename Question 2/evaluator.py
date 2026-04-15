@@ -1,5 +1,8 @@
 import os
 
+# Format numbers:
+# - Remove .0 if integer
+# - Otherwise round to 4 decimal places
 def format_num(n):
       if isinstance(n, float):
             if n.is_integer():
@@ -7,6 +10,8 @@ def format_num(n):
             return f"{n:.4f}"
       return str(n)
 
+# Convert input string into tokens (NUM, OP, LPAREN, RPAREN, END)
+# Validates numbers and rejects invalid characters
 def tokenize (expr):
       tokens =[]
       i=0
@@ -47,7 +52,8 @@ def tokenize (expr):
             raise ValueError("ERROR")
       tokens.append(("END",None))
       return tokens
-
+      
+# Convert token list into required output string format
 def tokens_to_string(tokens):
       parts=[]
       for ttype, val in tokens:
@@ -63,9 +69,11 @@ def tokens_to_string(tokens):
                   parts.append("[END]")
       return " ".join(parts)
 
+# Entry point for parsing expression (lowest precedence)
 def parse_expression(tokens,pos=0):
       return parse_add_sub(tokens,pos)
 
+# Handle addition and subtraction (left-associative)
 def parse_add_sub(tokens,pos):
       node,pos=parse_mul_div(tokens,pos)
       while pos<len(tokens) and tokens[pos][0]=="OP" and tokens[pos][1] in "+-":
@@ -74,6 +82,7 @@ def parse_add_sub(tokens,pos):
             node=(op,node,rhs)
       return node,pos
 
+# Check if token can start a value (used for implicit multiplication)
 def starts_unary_or_primary(tok):
       if tok[0]=="NUM":
             return True
@@ -83,6 +92,7 @@ def starts_unary_or_primary(tok):
             return True
       return False
 
+# Handle multiplication, division, and implicit multiplication
 def parse_mul_div(tokens,pos):
       node,pos=parse_unary(tokens,pos)
       while True:
@@ -97,6 +107,7 @@ def parse_mul_div(tokens,pos):
                   break
       return node,pos
 
+# Handle unary negation (e.g., -x → (neg x)), reject unary +
 def parse_unary(tokens,pos):
       if pos<len(tokens) and tokens[pos][0]=="OP":
             if tokens[pos][1]=="+":
@@ -106,6 +117,7 @@ def parse_unary(tokens,pos):
                   return("neg",node),new_pos
       return parse_primary(tokens,pos)
 
+# Handle numbers and parenthesized expressions
 def parse_primary(tokens,pos):
       if pos>=len(tokens):
             raise ValueError("ERROR")
@@ -119,6 +131,7 @@ def parse_primary(tokens,pos):
             return node, pos+1
       raise ValueError("ERROR")
 
+# Convert AST (parse tree) into required string format
 def tree_to_string(node):
       kind= node[0]
       if kind=="num":
@@ -129,6 +142,7 @@ def tree_to_string(node):
             return f"({kind} {tree_to_string(node[1])} {tree_to_string(node[2])})"
       raise ValueError("ERROR")
 
+# Evaluate AST recursively and compute final result
 def eval_tree(node):
       kind=node[0]
       if kind=="num":
@@ -148,6 +162,11 @@ def eval_tree(node):
             return eval_tree(node[1]) / denom
       raise ValueError("ERROR")
 
+# Main function:
+# - Read input file
+# - Tokenize, parse, evaluate each expression
+# - Write formatted output.txt
+# - Return structured results list
 def evaluate_file(input_path:str)-> list[dict]:
       results=[]
       with open (input_path,"r",encoding="utf-8") as f:
