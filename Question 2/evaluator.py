@@ -1,10 +1,10 @@
 import os
 
 def format_num(n):
-      if isinstance(n,float):
+      if isinstance(n, float):
             if n.is_integer():
                   return str(int(n))
-            return f"{n:.4f}".rstrip('0').rstrip('.')
+            return f"{n:.4f}"
       return str(n)
 
 def tokenize (expr):
@@ -45,7 +45,7 @@ def tokenize (expr):
                   i+=1
                   continue
             raise ValueError("ERROR")
-      tokens.append(("END",""))
+      tokens.append(("END",None))
       return tokens
 
 def tokens_to_string(tokens):
@@ -74,10 +74,12 @@ def parse_add_sub(tokens,pos):
             node=(op,node,rhs)
       return node,pos
 
-def starts_unary_or_primary(tok,prev_was_operand=False):
+def starts_unary_or_primary(tok):
       if tok[0]=="NUM":
             return True
       if tok[0]=="LPAREN":
+            return True
+      if tok[0]=="OP" and tok[1] == "-":
             return True
       return False
 
@@ -122,9 +124,9 @@ def tree_to_string(node):
       if kind=="num":
             return format_num(node[1])
       if kind=="neg":
-            return f"(neg{tree_to_string(node[1])})"
+            return f"(neg {tree_to_string(node[1])})"
       if kind in "+-*/":
-            return f"({kind}{tree_to_string(node[1])}{tree_to_string(node[2])})"
+            return f"({kind} {tree_to_string(node[1])} {tree_to_string(node[2])})"
       raise ValueError("ERROR")
 
 def eval_tree(node):
@@ -182,23 +184,23 @@ def evaluate_file(input_path:str)-> list[dict]:
                              "result" : result_store
                         }
 
-                        out.write(f"Input:{expr}\n")
-                        out.write(f"Tree:{tree_str}\n")
-                        out.write(f"Tokens:{token_str}\n")
-                        out.write(f"Result:{result_str}\n")
+                        out.write(f"Input: {expr}\n")
+                        out.write(f"Tree: {tree_str}\n")
+                        out.write(f"Tokens: {token_str}\n")
+                        out.write(f"Result: {result_str}\n")
 
                   except Exception:
                         item = {
-                              "input":expr,
-                              "tree":"ERROR",
-                              "tokens":"ERROR",
+                              "input": expr,
+                              "tree": "ERROR",
+                              "tokens": "ERROR",
                               "result":"ERROR"
                         }
 
-                        out.write(f"Input:{expr}\n")
+                        out.write(f"Input: {expr}\n")
                         out.write(f"Tree: ERROR\n")
                         out.write(f"Tokens: ERROR\n")
-                        out.write(f"Result:ERROR\n")
+                        out.write(f"Result: ERROR\n")
                   results.append(item)
       return results
 
@@ -220,3 +222,4 @@ if __name__=="__main__":
 
                   
                         
+
