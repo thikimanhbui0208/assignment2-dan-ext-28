@@ -5,15 +5,15 @@ def encrypt_file(shift1: int, shift2: int):
     with open('raw_text.txt', 'r') as f:
         text = f.read()
 
-    # List saved the result after encryption
+    # Saved the result after encryption
     encrypted_text = ''
 
     for char in text:
         # Group 1: Lowercase a to m -> shift forward by shift1 * shift2
         if 'a' <= char <= 'm':
-            pos = ord(char) - ord('a') # Posituon within group (0-12)
-            new_pos = (pos + shift1 * shift2) % 13 # Shift and wrap within range
-            new_char = chr(new_pos + ord('a')) #Convert back to character
+            pos = ord(char) - ord('a')
+            new_pos = (pos + shift1 * shift2) % 13
+            new_char = chr(new_pos + ord('a'))
         
         # Group 2: Lowercase n to z -> shift backward by shift1 + shift2
         elif 'n' <= char <= 'z':
@@ -36,8 +36,8 @@ def encrypt_file(shift1: int, shift2: int):
         else:
             new_char = char
 
-        encrypted_text += new_char # Add all characters into the final encrypted
-
+        encrypted_text += new_char
+        
     # Write the encrypted result to a file
     with open('encrypted_text.txt', 'w') as f:
        f.write(encrypted_text)
@@ -51,7 +51,7 @@ def decrypt_file(shift1: int, shift2: int):
     with open('encrypted_text.txt', 'r') as f:
         text = f.read()
 
-    # List saved the result after decryption
+    # Saved the result after decryption
     decrypted_text = ''
 
     for char in text:
