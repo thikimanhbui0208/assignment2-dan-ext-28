@@ -11,7 +11,7 @@ def format_num(n):
       return str(n)
 
 # Convert input string into tokens (NUM, OP, LPAREN, RPAREN, END)
-# Validates numbers and rejects invalid characters
+
 def tokenize (expr):
       tokens = []
       i = 0
