@@ -74,13 +74,12 @@ def decrypt_file(shift1: int, shift2: int):
             new_pos = (pos - shift2**2) % 13
             new_char = chr(new_pos + ord('N'))
 
-        # Other characters keep unchanged
         else:
             new_char = char
 
-        decrypted_text += new_char #  Add all characters into the final decrypted
+        decrypted_text += new_char 
     
-    # Write the decrypted result to a file
+  
     with open('decrypted_text.txt', 'w') as f:
        f.write(decrypted_text)
 
