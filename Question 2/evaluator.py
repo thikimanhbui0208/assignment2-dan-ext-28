@@ -80,7 +80,6 @@ def parse_add_sub(tokens,pos):
             node = (op,node,rhs)
       return node,pos
 
-# Check if token can start a value (used for implicit multiplication)
 def starts_unary_or_primary(tok):
       if tok[0] == "NUM":
             return True
