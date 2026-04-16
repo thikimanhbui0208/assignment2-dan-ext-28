@@ -1,11 +1,8 @@
 # Encryption function reads the raw file, encrypts each character and writes into a new files
 def encrypt_file(shift1: int, shift2: int):
 
-    # Read the raw file
     with open('raw_text.txt', 'r') as f:
         text = f.read()
-
-    # Saved the result after encryption
     encrypted_text = ''
 
     for char in text:
