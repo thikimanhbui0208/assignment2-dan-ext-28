@@ -10,14 +10,13 @@ def format_num(n):
             return f"{n:.4f}"
       return str(n)
 
-
 # Tokenize Function
 def tokenize (expr):
       tokens = []
       i = 0
-     while i<len(expr):
+      while i<len(expr):
             ch = expr[i]
-      if ch.isspace():
+            if ch.isspace():
                   i += 1
                   continue
             if ch.isdigit() or ch=='.':
@@ -71,7 +70,6 @@ def tokens_to_string(tokens):
 
 def parse_expression(tokens,pos=0):
       return parse_add_sub(tokens,pos)
-
 
 def parse_add_sub(tokens,pos):
       node,pos = parse_mul_div(tokens,pos)
@@ -161,7 +159,6 @@ def eval_tree(node):
       raise ValueError("ERROR")
 
 # Main function: read input file and then write the formatted output.
-
 def evaluate_file(input_path:str) -> list[dict]:
       results = []
       with open (input_path,"r",encoding="utf-8") as f:
@@ -219,21 +216,5 @@ def evaluate_file(input_path:str) -> list[dict]:
       return results
 
 if __name__ == "__main__":
-    evaluate_file("input.txt") 
-    print("You can check output.txt in the same folder")
-
-                      
-                            
-                            
-
-
-
-      
-
-      
-                  
-
-
-                  
-                        
-
+      evaluate_file("input.txt") 
+      print("You can check output.txt in the same folder")
