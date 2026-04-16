@@ -15,7 +15,7 @@ def format_num(n):
 def tokenize (expr):
       tokens = []
       i = 0
-      while i<len(expr):
+      for i<len(expr):
             ch = expr[i]
             if ch.isspace():
                   i += 1
