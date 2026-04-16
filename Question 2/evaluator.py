@@ -163,7 +163,6 @@ def eval_tree(node):
 # Main function:
 # - Read input file
 # - Tokenize, parse, evaluate each expression
-# - Write formatted output.txt
 
 def evaluate_file(input_path:str) -> list[dict]:
       results = []
