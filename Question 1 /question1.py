@@ -3,6 +3,7 @@ def encrypt_file(shift1: int, shift2: int):
 
     with open('raw_text.txt', 'r') as f:
         text = f.read()
+        
     encrypted_text = ''
 
     for char in text:
@@ -34,8 +35,7 @@ def encrypt_file(shift1: int, shift2: int):
             new_char = char
 
         encrypted_text += new_char
-        
-    # Write the encrypted result to a file
+  
     with open('encrypted_text.txt', 'w') as f:
        f.write(encrypted_text)
 
@@ -44,11 +44,9 @@ def encrypt_file(shift1: int, shift2: int):
 # Decryption function: read the encrypted file, reverses the encryption and writes into a new file
 def decrypt_file(shift1: int, shift2: int):
 
-    # Read the encrypted file
     with open('encrypted_text.txt', 'r') as f:
         text = f.read()
-
-    # Saved the result after decryption
+        
     decrypted_text = ''
 
     for char in text:
