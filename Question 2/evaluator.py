@@ -164,7 +164,7 @@ def eval_tree(node):
 # - Read input file
 # - Tokenize, parse, evaluate each expression
 # - Write formatted output.txt
-# - Return structured results list
+
 def evaluate_file(input_path:str) -> list[dict]:
       results = []
       with open (input_path,"r",encoding="utf-8") as f:
