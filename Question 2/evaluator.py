@@ -160,7 +160,7 @@ def eval_tree(node):
             return eval_tree(node[1]) / denom
       raise ValueError("ERROR")
 
-# Main function:
+# Main function: read input file and then write the formatted output.
 # - Read input file
 # - Tokenize, parse, evaluate each expression
 
