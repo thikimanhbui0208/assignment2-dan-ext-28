@@ -161,8 +161,6 @@ def eval_tree(node):
       raise ValueError("ERROR")
 
 # Main function: read input file and then write the formatted output.
-# - Read input file
-
 
 def evaluate_file(input_path:str) -> list[dict]:
       results = []
