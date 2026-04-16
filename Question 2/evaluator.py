@@ -18,7 +18,7 @@ def tokenize (expr):
       while i<len(expr):
             ch = expr[i]
             if ch.isspace():
-                  i += 1
+                  i += o
                   continue
             if ch.isdigit() or ch=='.':
                   start = i
