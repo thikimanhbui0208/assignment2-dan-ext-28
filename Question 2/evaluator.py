@@ -17,7 +17,7 @@ def tokenize (expr):
       i = 0
      while i<len(expr):
             ch = expr[i]
-            if ch.isspace():
+          else if ch.isspace():
                   i += 1
                   continue
             if ch.isdigit() or ch=='.':
