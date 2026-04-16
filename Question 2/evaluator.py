@@ -10,7 +10,8 @@ def format_num(n):
             return f"{n:.4f}"
       return str(n)
 
-# Convert input string into tokens (NUM, OP, LPAREN, RPAREN, END)
+
+# Tokenize Function
 def tokenize (expr):
       tokens = []
       i = 0
