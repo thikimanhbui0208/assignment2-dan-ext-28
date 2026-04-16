@@ -11,7 +11,6 @@ def format_num(n):
       return str(n)
 
 # Convert input string into tokens (NUM, OP, LPAREN, RPAREN, END)
-
 def tokenize (expr):
       tokens = []
       i = 0
@@ -69,11 +68,10 @@ def tokens_to_string(tokens):
                   parts.append("[END]")
       return " ".join(parts)
 
-# Entry point for parsing expression (lowest precedence)
 def parse_expression(tokens,pos=0):
       return parse_add_sub(tokens,pos)
 
-# Handle addition and subtraction (left-associative)
+
 def parse_add_sub(tokens,pos):
       node,pos = parse_mul_div(tokens,pos)
       while pos < len(tokens) and tokens[pos][0] == "OP" and tokens[pos][1] in "+-":
